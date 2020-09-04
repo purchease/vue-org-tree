@@ -2,7 +2,7 @@
   "name": "vue2-org-tree",
   "description": "A simple organization tree chart based on Vue2.x",
   "version": "1.3.4",
-  "main": "dist/index.js",
+  "main": "src/main.js",
   "module": "src/main.js",
   "browser": "dist/index.js",
   "author": "steven <986535362@qq.com>",
