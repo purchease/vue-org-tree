@@ -71,5 +71,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../styles/org-tree";
+@import "../../styles/org-tree";
 </style>
