@@ -1,16 +1,26 @@
 .org-tree-container {
-  display: inline-block;
   padding: 15px;
   background-color: #fff;
+  overflow: scroll;
+  width: 100%;
+  height: 100%;
 }
 
 .org-tree {
   // display: inline-block;
   display: table;
   text-align: center;
+  margin: 0 auto;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
 
-  &:before, &:after {
-    content: '';
+  &:before,
+  &:after {
+    content: "";
     display: table;
   }
 
@@ -26,44 +36,49 @@
   padding: 0;
   list-style-type: none;
 
-  &:before, &:after {
-    transition: all .35s;
+  &:before,
+  &:after {
+    transition: all 0.35s;
   }
 }
 .org-tree-node-label {
   position: relative;
   display: inline-block;
+  cursor: pointer;
 
   .org-tree-node-label-inner {
     padding: 10px 15px;
     text-align: center;
     border-radius: 3px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+    filter: brightness(120%);
+
+    &:hover {
+      filter: brightness(70%);
+    }
+    &.focused {
+      filter: invert();
+    }
   }
 }
 .org-tree-node-btn {
   position: absolute;
-  top: 100%;
-  left: 50%;
+  top: 0%;
+  right: 0%;
   width: 20px;
   height: 20px;
-  z-index: 10;
-  margin-left: -11px;
-  margin-top: 9px;
+  z-index: 2;
+  margin-left: 3px;
+  margin-top: 0px;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 50%;
-  box-shadow: 0 0 2px rgba(0, 0, 0, .15);
-  cursor: pointer;
-  transition: all .35s ease;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+  transition: all 0.35s ease;
 
-  &:hover {
-    background-color: #e7e8e9;
-    transform: scale(1.15);
-  }
-
-  &:before, &:after {
-    content: '';
+  &:before,
+  &:after {
+    content: "";
     position: absolute;
   }
 
@@ -72,7 +87,7 @@
     left: 4px;
     right: 4px;
     height: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #424242;
   }
 
   &:after {
@@ -80,11 +95,61 @@
     left: 50%;
     bottom: 4px;
     width: 0;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid #424242;
   }
 
   &.expanded:after {
     border: none;
+  }
+}
+.org-tree-node-btn-ref {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  z-index: 3;
+  margin-left: 3px;
+  margin-top: 0px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.35s ease;
+  opacity: 0.7;
+
+  &:hover {
+    transform: scale(1.25);
+  }
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+  }
+
+  &:before {
+    top: 50%;
+    left: 4px;
+    right: 4px;
+    height: 0;
+    border-top: 0px solid #ccc;
+  }
+
+  &:after {
+    top: 4px;
+    left: 50%;
+    bottom: 4px;
+    width: 0;
+    border-left: 0px solid #ccc;
+  }
+
+  &.expanded:after {
+    border: none;
+  }
+
+  &.referenced {
+    filter: invert();
   }
 }
 .org-tree-node {
@@ -92,13 +157,15 @@
   display: table-cell;
   vertical-align: top;
 
-  &.is-leaf, &.collapsed {
+  &.is-leaf,
+  &.collapsed {
     padding-left: 10px;
     padding-right: 10px;
   }
 
-  &:before, &:after {
-    content: '';
+  &:before,
+  &:after {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -115,13 +182,12 @@
   &:not(:last-child):after {
     border-top: 1px solid #ddd;
   }
-
 }
 .collapsable .org-tree-node.collapsed {
   padding-bottom: 30px;
 
   .org-tree-node-label:after {
-    content: '';
+    content: "";
     position: absolute;
     top: 100%;
     left: 0;
@@ -142,7 +208,7 @@
   display: table;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 50%;
@@ -152,7 +218,7 @@
   }
 
   &:after {
-    content: '';
+    content: "";
     display: table;
     clear: both;
   }
@@ -169,12 +235,14 @@
     padding-top: 0;
     padding-left: 20px;
 
-    &.is-leaf, &.collapsed {
+    &.is-leaf,
+    &.collapsed {
       padding-top: 10px;
       padding-bottom: 10px;
     }
 
-    &:before, &:after {
+    &:before,
+    &:after {
       width: 19px;
       height: 50%;
     }
@@ -203,7 +271,6 @@
     .org-tree-node-inner {
       display: table;
     }
-
   }
 
   .org-tree-node-label {
@@ -225,9 +292,9 @@
   }
 
   .org-tree-node-btn {
-    top: 50%;
-    left: 100%;
-    margin-top: -11px;
+    top: 0%;
+    left: 0%;
+    margin-top: 0px;
     margin-left: 9px;
   }
 
